@@ -801,3 +801,56 @@ Stage Summary:
 - Build is now self-contained: single `bun run build` command handles everything.
 - Standalone output includes: DB, schema, .env, uploads/outputs/models dirs, prisma client.
 - App degrades gracefully: if FFmpeg/Python missing on deploy, health shows "degraded" but app still loads and serves the dashboard.
+
+---
+Task ID: 16
+Agent: main (Z.ai Code) — user feature request
+Task: Custom AI Instructions + Target Clip Duration for highlight detection.
+
+Work Log:
+- Added TargetDuration type + DURATION_RANGES to highlight-detection.ts:
+  - under-30: 15-29 seconds
+  - 30-60: 30-60 seconds
+  - 60-plus: 60-90 seconds
+- Added CUSTOM_PROMPT_PATTERNS: 6 keyword libraries (emotional, funny, tip, story, hook, viral) that boost segments matching common user intent phrases.
+- Added scoreSegmentForCustomPrompt(): scores segments against the user's free-text prompt using:
+  1. Direct keyword overlap (prompt words vs segment text)
+  2. Pattern library matching (if prompt mentions "emotional", segments with emotional cues get boosted)
+  3. Structural signals + length + position bias (same as category scoring)
+- Added adjustToDurationRange(): adjusts highlight start/end boundaries to fit within the target duration range, snapping to sentence/segment edges:
+  - If too short: extends forward then backward to reach min, snapping to segment ends
+  - If too long: trims from end then start, snapping to segment ends
+  - Always stays within [min, max] range
+- Updated detectHighlights() to accept customPrompt + targetDuration params:
+  - If customPrompt provided: each segment is also scored against the prompt; matching segments get category "hook" with reasoning that references the user's prompt
+  - If targetDuration provided: after merging + ranking, each highlight's boundaries are adjusted to fit the target range
+- Updated POST /api/videos/[id]/highlights: Zod schema now accepts customPrompt (string, max 500) and targetDuration (enum: under-30, 30-60, 60-plus).
+- Updated api-schemas.ts: DetectHighlightsRequestSchema + TARGET_DURATIONS constant + TargetDurationId type.
+- Added defaultTargetDuration to settings store (default: '30-60').
+- Updated HighlightsPanel UI: added advanced options panel (visible when transcript exists) with:
+  - Custom AI instructions text input (placeholder: "e.g., Find the emotional moments, Find the funny moments, Find key tips")
+  - Target clip duration 3-button selector (Under 30 seconds / 30 to 60 seconds / 1 minute+) with hint text showing the second ranges
+  - Enter key in the prompt input triggers detection
+- Updated handleDetect to pass customPrompt + targetDuration to the API.
+- Updated handleProcessAll to pass defaultTargetDuration from settings.
+
+End-to-end testing:
+1. Uploaded 30s test video with speech containing "emotional", "incredible", "funny", "tip", "secret", "breakthrough".
+2. Transcribed with tiny model → 7 segments, language en.
+3. Ran highlight detection with customPrompt="Find the emotional moments" + targetDuration="under-30":
+   - 5 highlights detected, all within 15-29s range ✓
+   - Top result (score 0.90): "This is an amazing emotional story about AI" — matched "emotional" from prompt ✓
+   - Reasoning: "High confidence match for user prompt 'Find the emotional moments' near the start. Signals: prompt-match (1), prompt:emotional." ✓
+   - Duration adjustment worked: all highlights snapped to 15-17.8s (within under-30 range) ✓
+
+Stage Summary:
+- Custom AI Instructions + Target Clip Duration COMPLETE.
+- Modified files (4):
+  - src/server/services/highlight-detection.ts (customPrompt scoring + targetDuration adjustment + new types)
+  - src/app/api/videos/[id]/highlights/route.ts (accept new params)
+  - src/types/clipforge/api-schemas.ts (TARGET_DURATIONS, TargetDurationId)
+  - src/stores/settings-store.ts (defaultTargetDuration)
+  - src/components/clipforge/views/video-detail-view.tsx (UI: prompt input + duration selector)
+- Custom prompt uses keyword overlap + pattern library to boost matching segments.
+- Target duration snaps highlight boundaries to sentence edges while respecting 15-29s / 30-60s / 60-90s ranges.
+- Both features work together: user can type "Find the funny moments" + select "Under 30 seconds" → gets short clips of funny moments.

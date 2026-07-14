@@ -1,0 +1,8 @@
+{
+  "/api/health/route": "app/api/health/route.js",
+  "/api/stats/route": "app/api/stats/route.js",
+  "/api/videos/[id]/highlights/route": "app/api/videos/[id]/highlights/route.js",
+  "/api/videos/[id]/route": "app/api/videos/[id]/route.js",
+  "/api/videos/[id]/transcribe/route": "app/api/videos/[id]/transcribe/route.js",
+  "/api/videos/route": "app/api/videos/route.js"
+}

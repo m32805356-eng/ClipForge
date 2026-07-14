@@ -9,6 +9,7 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { SUBTITLE_STYLES } from '@/lib/clipforge/constants'
+import type { TargetDurationId } from '@/types/clipforge/api-schemas'
 
 export type WhisperModelSize = 'tiny' | 'base' | 'small' | 'medium' | 'large-v3'
 
@@ -23,6 +24,8 @@ interface ClipForgeSettings {
   defaultMaxHighlights: number
   /** Min confidence score (0..1) for highlight detection. */
   defaultMinScore: number
+  /** Default target clip duration for highlight detection. */
+  defaultTargetDuration: TargetDurationId
   /** Auto-transcribe after upload. */
   autoTranscribe: boolean
   /** Auto-detect highlights after transcription. */
@@ -35,6 +38,7 @@ interface ClipForgeSettings {
   setDefaultPadSeconds: (n: number) => void
   setDefaultMaxHighlights: (n: number) => void
   setDefaultMinScore: (n: number) => void
+  setDefaultTargetDuration: (d: TargetDurationId) => void
   setAutoTranscribe: (b: boolean) => void
   setAutoDetectHighlights: (b: boolean) => void
   setShowTimestamps: (b: boolean) => void
@@ -47,6 +51,7 @@ const DEFAULTS = {
   defaultPadSeconds: 0.5,
   defaultMaxHighlights: 12,
   defaultMinScore: 0.25,
+  defaultTargetDuration: '30-60' as TargetDurationId,
   autoTranscribe: false,
   autoDetectHighlights: false,
   showTimestamps: true,
@@ -61,6 +66,7 @@ export const useSettings = create<ClipForgeSettings>()(
       setDefaultPadSeconds: (defaultPadSeconds) => set({ defaultPadSeconds }),
       setDefaultMaxHighlights: (defaultMaxHighlights) => set({ defaultMaxHighlights }),
       setDefaultMinScore: (defaultMinScore) => set({ defaultMinScore }),
+      setDefaultTargetDuration: (defaultTargetDuration) => set({ defaultTargetDuration }),
       setAutoTranscribe: (autoTranscribe) => set({ autoTranscribe }),
       setAutoDetectHighlights: (autoDetectHighlights) => set({ autoDetectHighlights }),
       setShowTimestamps: (showTimestamps) => set({ showTimestamps }),

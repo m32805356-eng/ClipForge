@@ -55,7 +55,8 @@ import {
   ApiClientError,
 } from '@/hooks/use-clipforge-api'
 import { HIGHLIGHT_CATEGORIES, SUBTITLE_STYLES } from '@/lib/clipforge/constants'
-import type { HighlightCategory } from '@/types/clipforge/api-schemas'
+import type { HighlightCategory, TargetDurationId } from '@/types/clipforge/api-schemas'
+import { TARGET_DURATIONS } from '@/types/clipforge/api-schemas'
 import { formatBytes, formatDuration, formatRelativeTime, formatScore } from '@/lib/clipforge/format'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
@@ -107,13 +108,14 @@ export function VideoDetailView() {
           options: { modelSize: settings.defaultModelSize },
         })
       }
-      // Step 2: Detect highlights
+      // Step 2: Detect highlights (with default target duration from settings)
       toast.info('Step 2/3: Detecting highlights…')
       await detectMutation.mutateAsync({
         videoId,
         options: {
           maxHighlights: settings.defaultMaxHighlights,
           minScore: settings.defaultMinScore,
+          targetDuration: settings.defaultTargetDuration ?? '30-60',
         },
       })
       // Step 3: Generate clips
@@ -562,6 +564,9 @@ function HighlightsPanel({
   const settings = useSettings()
   const [activeCategory, setActiveCategory] = React.useState<HighlightCategory | 'all'>('all')
   const [expandedId, setExpandedId] = React.useState<string | null>(null)
+  const [customPrompt, setCustomPrompt] = React.useState('')
+  const [targetDuration, setTargetDuration] = React.useState<TargetDurationId>('30-60')
+  const [showAdvanced, setShowAdvanced] = React.useState(false)
   const videoRef = React.useRef<HTMLVideoElement | null>(null)
 
   React.useEffect(() => {
@@ -575,10 +580,14 @@ function HighlightsPanel({
         options: {
           maxHighlights: settings.defaultMaxHighlights,
           minScore: settings.defaultMinScore,
+          customPrompt: customPrompt.trim() || null,
+          targetDuration,
         },
       })
       toast.success(`Found ${result.count} highlights`, {
-        description: 'Click any highlight to seek the video.',
+        description: customPrompt.trim()
+          ? `Matched: "${customPrompt.trim().slice(0, 40)}"`
+          : 'Click any highlight to seek the video.',
       })
     } catch (e) {
       const msg = e instanceof ApiClientError ? e.message : (e as Error).message
@@ -643,6 +652,51 @@ function HighlightsPanel({
           <p className="text-[10px] text-muted-foreground">
             Transcribe the video first to enable highlight detection.
           </p>
+        )}
+        {hasTranscript && (
+          <div className="space-y-2 rounded-lg border border-border bg-muted/20 p-2.5">
+            {/* Custom prompt input */}
+            <div className="space-y-1">
+              <label className="flex items-center gap-1 text-[10px] font-medium text-muted-foreground">
+                <Wand2 className="h-2.5 w-2.5" />
+                Custom AI instructions
+              </label>
+              <input
+                type="text"
+                value={customPrompt}
+                onChange={(e) => setCustomPrompt(e.target.value)}
+                placeholder="e.g., Find the emotional moments, Find the funny moments, Find key tips"
+                className="h-8 w-full rounded-md border border-input bg-background px-2.5 text-[11px] outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !isDetecting) handleDetect()
+                }}
+              />
+            </div>
+            {/* Target duration dropdown */}
+            <div className="space-y-1">
+              <label className="flex items-center gap-1 text-[10px] font-medium text-muted-foreground">
+                <Clock className="h-2.5 w-2.5" />
+                Target clip duration
+              </label>
+              <div className="grid grid-cols-3 gap-1">
+                {TARGET_DURATIONS.map((opt) => (
+                  <button
+                    key={opt.id}
+                    onClick={() => setTargetDuration(opt.id)}
+                    className={cn(
+                      'rounded-md border px-1.5 py-1 text-center text-[9px] font-medium transition-all',
+                      targetDuration === opt.id
+                        ? 'border-primary bg-primary/10 text-primary'
+                        : 'border-border bg-background text-muted-foreground hover:border-primary/40',
+                    )}
+                  >
+                    <div>{opt.label}</div>
+                    <div className="text-[8px] opacity-70">{opt.hint}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
         )}
       </CardHeader>
       <CardContent>

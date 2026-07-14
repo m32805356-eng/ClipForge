@@ -247,8 +247,18 @@ export type DetectedHighlight = z.infer<typeof DetectedHighlightSchema>
 export const DetectHighlightsRequestSchema = z.object({
   maxHighlights: z.number().int().min(1).max(50).optional(),
   minScore: z.number().min(0).max(1).optional(),
+  customPrompt: z.string().max(500).optional(),
+  targetDuration: z.enum(['under-30', '30-60', '60-plus']).optional(),
 })
 export type DetectHighlightsRequest = z.infer<typeof DetectHighlightsRequestSchema>
+
+/** Target duration options for clip generation. */
+export const TARGET_DURATIONS = [
+  { id: 'under-30' as const, label: 'Under 30 seconds', hint: '15–29s' },
+  { id: '30-60' as const, label: '30 to 60 seconds', hint: '30–60s' },
+  { id: '60-plus' as const, label: '1 minute+', hint: '60–90s' },
+]
+export type TargetDurationId = (typeof TARGET_DURATIONS)[number]['id']
 
 export const DetectHighlightsResultSchema = z.object({
   count: z.number(),
