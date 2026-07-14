@@ -1,0 +1,167 @@
+// ClipForge — Prisma schema
+// SQLite datasource for personal-use local AI video clipping.
+// Designed up-front for all 8 phases to avoid repeated migrations.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// A source video uploaded by the user (Phase 1).
+model Video {
+  id          String   @id @default(cuid())
+  /// Original filename from the uploader.
+  filename    String
+  /// Generated safe filename on disk (cuid + extension).
+  storageName String
+  /// Absolute or project-relative path under uploads/.
+  filePath    String
+  /// Mime type, e.g. video/mp4.
+  mimeType    String
+  /// File size in bytes.
+  sizeBytes   Int
+  /// Duration in seconds (populated after ffprobe).
+  duration    Float?
+  /// Width in pixels.
+  width       Int?
+  /// Height in pixels.
+  height      Int?
+  /// Thumbnail relative path (outputs/...).
+  thumbnail   String?
+
+  /// Processing lifecycle.
+  status      VideoStatus @default(UPLOADED)
+  /// 0..100 progress for the current status stage.
+  progress    Int     @default(0)
+  /// Human-readable status / error message.
+  message     String?
+
+  transcript  Transcript?
+  highlights  Highlight[]
+  clips       Clip[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+/// Word/segment-level transcript produced by Whisper (Phase 2).
+model Transcript {
+  id        String @id @default(cuid())
+  videoId   String @unique
+  video     Video  @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  /// Full plain-text transcript.
+  text      String
+  /// Detected language code (e.g. "en").
+  language  String?
+  /// Whisper model id used (e.g. "base").
+  model     String?
+  /// Segments serialized as JSON: [{start,end,text,words?}].
+  segments  String
+  /// Duration in seconds covered.
+  duration  Float?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// A detected engaging moment (Phase 3).
+model Highlight {
+  id         String  @id @default(cuid())
+  videoId    String
+  video      Video   @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  /// Seconds from start.
+  start      Float
+  /// Seconds from end.
+  end        Float
+  /// Suggested clip title.
+  title      String
+  /// Why this moment is engaging (explanation).
+  reasoning  String?
+  /// Category: hook | emotional | story | funny | educational | viral.
+  category   HighlightCategory
+  /// 0..1 confidence score.
+  score      Float
+  /// Excerpt of the transcript for this moment.
+  excerpt    String?
+
+  clips      Clip[]
+
+  createdAt  DateTime @default(now())
+
+  @@index([videoId])
+  @@index([category])
+  @@index([score])
+}
+
+/// A produced vertical clip (Phase 4+).
+model Clip {
+  id           String @id @default(cuid())
+  videoId      String
+  video        Video  @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  highlightId  String?
+  highlight    Highlight? @relation(fields: [highlightId], references: [id], onDelete: SetNull)
+  /// Display title.
+  title        String
+  /// Relative path under outputs/.
+  filePath     String
+  /// Thumbnail relative path.
+  thumbnail    String?
+  /// Output width (e.g. 1080).
+  width        Int
+  /// Output height (e.g. 1920).
+  height       Int
+  /// Duration in seconds.
+  duration     Float
+  /// File size in bytes.
+  sizeBytes    Int
+  /// Whether subtitles are burned in.
+  hasSubtitles Boolean @default(false)
+  /// Subtitle style id used (e.g. "bold-white", "karaoke").
+  subtitleStyle String?
+  /// Processing lifecycle.
+  status       ClipStatus @default(QUEUED)
+  message      String?
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([videoId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum VideoStatus {
+  UPLOADED
+  PROBING
+  EXTRACTING_AUDIO
+  TRANSCRIBING
+  ANALYZING
+  READY
+  FAILED
+}
+
+enum HighlightCategory {
+  hook
+  emotional
+  story
+  funny
+  educational
+  viral
+}
+
+enum ClipStatus {
+  QUEUED
+  CUTTING
+  CROPPING
+  SUBTITLING
+  RENDERING
+  READY
+  FAILED
+}
