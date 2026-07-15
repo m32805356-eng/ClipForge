@@ -116,3 +116,67 @@ prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Cl
  GET /api/stats 200 in 118ms (compile: 80ms, render: 39ms)
  GET /api/health 200 in 297ms (compile: 3ms, render: 294ms)
  GET /api/files/outputs/cmrkbd0z20000ohch07r8l7vs/thumb.jpg 200 in 33ms (compile: 25ms, render: 9ms)
+ GET / 200 in 49ms (compile: 3ms, render: 46ms)
+ GET / 200 in 116ms (compile: 4ms, render: 112ms)
+ GET / 200 in 53ms (compile: 1936µs, render: 51ms)
+prisma:query SELECT 1
+ GET /api/videos?pageSize=6 200 in 11ms (compile: 3ms, render: 7ms)
+prisma:query SELECT `main`.`Video`.`id`, `main`.`Video`.`filename`, `main`.`Video`.`storageName`, `main`.`Video`.`filePath`, `main`.`Video`.`mimeType`, `main`.`Video`.`sizeBytes`, `main`.`Video`.`duration`, `main`.`Video`.`width`, `main`.`Video`.`height`, `main`.`Video`.`thumbnail`, `main`.`Video`.`status`, `main`.`Video`.`progress`, `main`.`Video`.`message`, `main`.`Video`.`createdAt`, `main`.`Video`.`updatedAt`, COALESCE(`aggr_selection_0_Clip`.`_aggr_count_clips`, 0) AS `_aggr_count_clips` FROM `main`.`Video` LEFT JOIN (SELECT `main`.`Clip`.`videoId`, COUNT(*) AS `_aggr_count_clips` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`videoId`) AS `aggr_selection_0_Clip` ON (`main`.`Video`.`id` = `aggr_selection_0_Clip`.`videoId`) WHERE 1=1 ORDER BY `main`.`Video`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Video`.`id` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Video`.`status` FROM `main`.`Video` WHERE 1=1 GROUP BY `main`.`Video`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Clip`.`status` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Highlight`.`id` FROM `main`.`Highlight` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`duration`) AS `_sum$duration` FROM (SELECT `main`.`Video`.`duration` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Highlight`.`category` FROM `main`.`Highlight` WHERE 1=1 GROUP BY `main`.`Highlight`.`category` LIMIT ? OFFSET ?
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Video`.`sizeBytes` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Clip`.`sizeBytes` FROM `main`.`Clip` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/stats 200 in 169ms (compile: 134ms, render: 35ms)
+ GET /api/health 200 in 274ms (compile: 2ms, render: 272ms)
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Video`.`status` FROM `main`.`Video` WHERE 1=1 GROUP BY `main`.`Video`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Highlight`.`id` FROM `main`.`Highlight` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Clip`.`status` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Highlight`.`category` FROM `main`.`Highlight` WHERE 1=1 GROUP BY `main`.`Highlight`.`category` LIMIT ? OFFSET ?
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Video`.`sizeBytes` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`duration`) AS `_sum$duration` FROM (SELECT `main`.`Video`.`duration` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Clip`.`sizeBytes` FROM `main`.`Clip` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/stats 200 in 12ms (compile: 3ms, render: 9ms)
+prisma:query SELECT 1
+ GET /api/health 200 in 263ms (compile: 2ms, render: 260ms)
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Video`.`status` FROM `main`.`Video` WHERE 1=1 GROUP BY `main`.`Video`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Clip`.`status` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Highlight`.`id` FROM `main`.`Highlight` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`duration`) AS `_sum$duration` FROM (SELECT `main`.`Video`.`duration` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Highlight`.`category` FROM `main`.`Highlight` WHERE 1=1 GROUP BY `main`.`Highlight`.`category` LIMIT ? OFFSET ?
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Video`.`sizeBytes` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Clip`.`sizeBytes` FROM `main`.`Clip` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/stats 200 in 15ms (compile: 3ms, render: 11ms)
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Video`.`status` FROM `main`.`Video` WHERE 1=1 GROUP BY `main`.`Video`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Highlight`.`id` FROM `main`.`Highlight` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT 1
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Video`.`sizeBytes` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Highlight`.`category` FROM `main`.`Highlight` WHERE 1=1 GROUP BY `main`.`Highlight`.`category` LIMIT ? OFFSET ?
+prisma:query SELECT SUM(`duration`) AS `_sum$duration` FROM (SELECT `main`.`Video`.`duration` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Clip`.`status` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`status` LIMIT ? OFFSET ?
+ GET /api/stats 200 in 12ms (compile: 3ms, render: 9ms)
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Clip`.`sizeBytes` FROM `main`.`Clip` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET / 200 in 76ms (compile: 4ms, render: 72ms)
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Video`.`status` FROM `main`.`Video` WHERE 1=1 GROUP BY `main`.`Video`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Clip`.`status` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Highlight`.`id` FROM `main`.`Highlight` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Highlight`.`category` FROM `main`.`Highlight` WHERE 1=1 GROUP BY `main`.`Highlight`.`category` LIMIT ? OFFSET ?
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Video`.`sizeBytes` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`duration`) AS `_sum$duration` FROM (SELECT `main`.`Video`.`duration` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/videos?pageSize=6 200 in 30ms (compile: 20ms, render: 10ms)
+ GET /api/stats 200 in 110ms (compile: 80ms, render: 30ms)
+prisma:query SELECT `main`.`Video`.`id`, `main`.`Video`.`filename`, `main`.`Video`.`storageName`, `main`.`Video`.`filePath`, `main`.`Video`.`mimeType`, `main`.`Video`.`sizeBytes`, `main`.`Video`.`duration`, `main`.`Video`.`width`, `main`.`Video`.`height`, `main`.`Video`.`thumbnail`, `main`.`Video`.`status`, `main`.`Video`.`progress`, `main`.`Video`.`message`, `main`.`Video`.`createdAt`, `main`.`Video`.`updatedAt`, COALESCE(`aggr_selection_0_Clip`.`_aggr_count_clips`, 0) AS `_aggr_count_clips` FROM `main`.`Video` LEFT JOIN (SELECT `main`.`Clip`.`videoId`, COUNT(*) AS `_aggr_count_clips` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`videoId`) AS `aggr_selection_0_Clip` ON (`main`.`Video`.`id` = `aggr_selection_0_Clip`.`videoId`) WHERE 1=1 ORDER BY `main`.`Video`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Clip`.`sizeBytes` FROM `main`.`Clip` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Video`.`id` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/health 200 in 349ms (compile: 2ms, render: 346ms)
+ GET /api/files/outputs/cmrkbd0z20000ohch07r8l7vs/thumb.jpg 200 in 47ms (compile: 29ms, render: 19ms)
