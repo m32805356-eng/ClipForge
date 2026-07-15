@@ -1,0 +1,17 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+WrapStyle: 2
+YCbCr Matrix: TV.709
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial Black,72,&H00FFFFFF,&H000088FF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,6,3,2,80,80,180,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.50,0:00:02.14,Default,,0,0,0,,{\k27} This {\k27} is {\k27} why {\k27} big {\k27} tech {\k29} companies
+Dialogue: 0,0:00:02.14,0:00:04.54,Default,,0,0,0,,{\k40} have {\k40} such {\k40} an {\k40} advantage. {\k40} They {\k40} have
+Dialogue: 0,0:00:04.54,0:00:06.98,Default,,0,0,0,,{\k48} access {\k48} to {\k48} enormous {\k48} datasets. {\k52} But

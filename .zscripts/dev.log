@@ -84,3 +84,245 @@ Mini-services startup completed. Started 0 service(s).
 
 Next.js dev server is running in background (PID: 1196).
 Use 'kill 1196' to stop it.
+==========================================
+[2026-07-15 02:31:01] Starting: bun install
+==========================================
+[BUN] Installing dependencies...
+[0.11ms] ".env"
+bun install v1.3.14 (0d9b296a)
+
+Checked 850 installs across 919 packages (no changes) [82.00ms]
+==========================================
+[2026-07-15 02:31:01] Completed: bun install
+[LOG] Step: bun install | Duration: 0s
+==========================================
+
+==========================================
+[2026-07-15 02:31:01] Starting: bun run db:push
+==========================================
+[BUN] Setting up database...
+$ prisma db push
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": SQLite database "custom.db" at "file:/home/z/my-project/db/custom.db"
+
+The database is already in sync with the Prisma schema.
+
+Running generate... (Use --skip-generate to skip the generators)
+[2K[1A[2K[GRunning generate... - Prisma Client
+[2K[1A[2K[G✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 179ms
+
+==========================================
+[2026-07-15 02:31:04] Completed: bun run db:push
+[LOG] Step: bun run db:push | Duration: 3s
+==========================================
+
+==========================================
+[2026-07-15 02:31:04] Starting: Starting Next.js dev server
+==========================================
+[BUN] Starting development server...
+==========================================
+$ next dev -p 3000 2>&1 | tee dev.log
+[2026-07-15 02:31:04] Completed: Starting Next.js dev server
+[LOG] Step: Starting Next.js dev server | Duration: 0s
+==========================================
+
+==========================================
+[2026-07-15 02:31:04] Starting: Waiting for Next.js dev server
+==========================================
+Waiting for Next.js dev server to be ready on localhost:3000...
+Attempt 1/60: Next.js dev server not ready yet, waiting...
+⨯ Failed to start server
+Error: listen EADDRINUSE: address already in use :::3000
+    at <unknown> (Error: listen EADDRINUSE: address already in use :::3000)
+    at new Promise (<anonymous>) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+[?25h
+Attempt 2/60: Next.js dev server not ready yet, waiting...
+Next.js dev server is ready!
+==========================================
+[2026-07-15 02:31:14] Completed: Waiting for Next.js dev server
+[LOG] Step: Waiting for Next.js dev server | Duration: 10s
+==========================================
+
+==========================================
+[2026-07-15 02:31:14] Starting: Health check
+==========================================
+[BUN] Performing health check...
+[BUN] Health check passed
+==========================================
+[2026-07-15 02:31:14] Completed: Health check
+[LOG] Step: Health check | Duration: 0s
+==========================================
+
+==========================================
+[2026-07-15 02:31:14] Starting: Starting mini-services
+==========================================
+Found mini-services directory, scanning for sub-services...
+Mini-services startup completed. Started 0 service(s).
+==========================================
+[2026-07-15 02:31:14] Completed: Starting mini-services
+[LOG] Step: Starting mini-services | Duration: 0s
+==========================================
+
+Next.js dev server is running in background (PID: 1146).
+Use 'kill 1146' to stop it.
+==========================================
+[2026-07-15 11:26:41] Starting: bun install
+==========================================
+[BUN] Installing dependencies...
+[0.11ms] ".env"
+bun install v1.3.14 (0d9b296a)
+
+Checked 850 installs across 919 packages (no changes) [41.00ms]
+==========================================
+[2026-07-15 11:26:41] Completed: bun install
+[LOG] Step: bun install | Duration: 0s
+==========================================
+
+==========================================
+[2026-07-15 11:26:41] Starting: bun run db:push
+==========================================
+[BUN] Setting up database...
+$ prisma db push
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": SQLite database "custom.db" at "file:/home/z/my-project/db/custom.db"
+
+The database is already in sync with the Prisma schema.
+
+Running generate... (Use --skip-generate to skip the generators)
+[2K[1A[2K[GRunning generate... - Prisma Client
+[2K[1A[2K[G✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 82ms
+
+==========================================
+[2026-07-15 11:26:43] Completed: bun run db:push
+[LOG] Step: bun run db:push | Duration: 2s
+==========================================
+
+==========================================
+[2026-07-15 11:26:43] Starting: Starting Next.js dev server
+==========================================
+[BUN] Starting development server...
+==========================================
+[2026-07-15 11:26:43] Completed: Starting Next.js dev server
+[LOG] Step: Starting Next.js dev server | Duration: 0s
+==========================================
+
+==========================================
+$ next dev -p 3000 2>&1 | tee dev.log
+[2026-07-15 11:26:43] Starting: Waiting for Next.js dev server
+==========================================
+Waiting for Next.js dev server to be ready on localhost:3000...
+Attempt 1/60: Next.js dev server not ready yet, waiting...
+▲ Next.js 16.1.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://21.0.12.157:3000
+- Environments: .env
+
+✓ Starting...
+✓ Ready in 1181ms
+○ Compiling / ...
+Attempt 2/60: Next.js dev server not ready yet, waiting...
+ GET / 200 in 1105ms (compile: 519ms, render: 586ms)
+Next.js dev server is ready!
+ GET / 200 in 931ms (compile: 767ms, render: 164ms)
+==========================================
+ GET / 200 in 4.0s (compile: 3.5s, render: 560ms)
+[2026-07-15 11:26:51] Completed: Waiting for Next.js dev server
+[LOG] Step: Waiting for Next.js dev server | Duration: 8s
+==========================================
+
+==========================================
+[2026-07-15 11:26:51] Starting: Health check
+==========================================
+[BUN] Performing health check...
+ GET / 200 in 46ms (compile: 2ms, render: 44ms)
+[BUN] Health check passed
+==========================================
+[2026-07-15 11:26:51] Completed: Health check
+[LOG] Step: Health check | Duration: 0s
+==========================================
+
+==========================================
+[2026-07-15 11:26:51] Starting: Starting mini-services
+==========================================
+ GET / 200 in 50ms (compile: 3ms, render: 47ms)
+Found mini-services directory, scanning for sub-services...
+Mini-services startup completed. Started 0 service(s).
+==========================================
+[2026-07-15 11:26:51] Completed: Starting mini-services
+[LOG] Step: Starting mini-services | Duration: 0s
+==========================================
+
+Next.js dev server is running in background (PID: 1214).
+Use 'kill 1214' to stop it.
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Video`.`id` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Video`.`status` FROM `main`.`Video` WHERE 1=1 GROUP BY `main`.`Video`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Clip`.`status` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Highlight`.`id` FROM `main`.`Highlight` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Highlight`.`category` FROM `main`.`Highlight` WHERE 1=1 GROUP BY `main`.`Highlight`.`category` LIMIT ? OFFSET ?
+ GET /api/health 200 in 1163ms (compile: 608ms, render: 555ms)
+ GET /api/videos?pageSize=6 200 in 1081ms (compile: 915ms, render: 166ms)
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Video`.`sizeBytes` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`duration`) AS `_sum$duration` FROM (SELECT `main`.`Video`.`duration` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Video`.`id`, `main`.`Video`.`filename`, `main`.`Video`.`storageName`, `main`.`Video`.`filePath`, `main`.`Video`.`mimeType`, `main`.`Video`.`sizeBytes`, `main`.`Video`.`duration`, `main`.`Video`.`width`, `main`.`Video`.`height`, `main`.`Video`.`thumbnail`, `main`.`Video`.`status`, `main`.`Video`.`progress`, `main`.`Video`.`message`, `main`.`Video`.`createdAt`, `main`.`Video`.`updatedAt`, COALESCE(`aggr_selection_0_Clip`.`_aggr_count_clips`, 0) AS `_aggr_count_clips` FROM `main`.`Video` LEFT JOIN (SELECT `main`.`Clip`.`videoId`, COUNT(*) AS `_aggr_count_clips` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`videoId`) AS `aggr_selection_0_Clip` ON (`main`.`Video`.`id` = `aggr_selection_0_Clip`.`videoId`) WHERE 1=1 ORDER BY `main`.`Video`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Clip`.`sizeBytes` FROM `main`.`Clip` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/stats 200 in 1156ms (compile: 1050ms, render: 106ms)
+ GET /api/files/outputs/cmrkbd0z20000ohch07r8l7vs/thumb.jpg 200 in 938ms (compile: 915ms, render: 23ms)
+ GET / 200 in 65ms (compile: 4ms, render: 61ms)
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Clip`.`status` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Highlight`.`id` FROM `main`.`Highlight` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Highlight`.`category` FROM `main`.`Highlight` WHERE 1=1 GROUP BY `main`.`Highlight`.`category` LIMIT ? OFFSET ?
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Video`.`sizeBytes` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`duration`) AS `_sum$duration` FROM (SELECT `main`.`Video`.`duration` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Video`.`status` FROM `main`.`Video` WHERE 1=1 GROUP BY `main`.`Video`.`status` LIMIT ? OFFSET ?
+ GET /api/stats 200 in 142ms (compile: 3ms, render: 139ms)
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Clip`.`sizeBytes` FROM `main`.`Clip` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT 1
+ GET /api/health 200 in 537ms (compile: 3ms, render: 534ms)
+ GET /api/videos?pageSize=6 200 in 180ms (compile: 172ms, render: 8ms)
+prisma:query SELECT `main`.`Video`.`id`, `main`.`Video`.`filename`, `main`.`Video`.`storageName`, `main`.`Video`.`filePath`, `main`.`Video`.`mimeType`, `main`.`Video`.`sizeBytes`, `main`.`Video`.`duration`, `main`.`Video`.`width`, `main`.`Video`.`height`, `main`.`Video`.`thumbnail`, `main`.`Video`.`status`, `main`.`Video`.`progress`, `main`.`Video`.`message`, `main`.`Video`.`createdAt`, `main`.`Video`.`updatedAt`, COALESCE(`aggr_selection_0_Clip`.`_aggr_count_clips`, 0) AS `_aggr_count_clips` FROM `main`.`Video` LEFT JOIN (SELECT `main`.`Clip`.`videoId`, COUNT(*) AS `_aggr_count_clips` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`videoId`) AS `aggr_selection_0_Clip` ON (`main`.`Video`.`id` = `aggr_selection_0_Clip`.`videoId`) WHERE 1=1 ORDER BY `main`.`Video`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Video`.`id` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Video`.`status` FROM `main`.`Video` WHERE 1=1 GROUP BY `main`.`Video`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Clip`.`status` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT 1
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Video`.`sizeBytes` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`duration`) AS `_sum$duration` FROM (SELECT `main`.`Video`.`duration` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Highlight`.`id` FROM `main`.`Highlight` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Highlight`.`category` FROM `main`.`Highlight` WHERE 1=1 GROUP BY `main`.`Highlight`.`category` LIMIT ? OFFSET ?
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Clip`.`sizeBytes` FROM `main`.`Clip` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/stats 200 in 13ms (compile: 3ms, render: 11ms)
+prisma:query SELECT 1
+ GET /api/health 200 in 265ms (compile: 3ms, render: 262ms)
+ GET / 200 in 72ms (compile: 4ms, render: 68ms)
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Video`.`status` FROM `main`.`Video` WHERE 1=1 GROUP BY `main`.`Video`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Highlight`.`id` FROM `main`.`Highlight` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Highlight`.`category` FROM `main`.`Highlight` WHERE 1=1 GROUP BY `main`.`Highlight`.`category` LIMIT ? OFFSET ?
+prisma:query SELECT SUM(`duration`) AS `_sum$duration` FROM (SELECT `main`.`Video`.`duration` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Video`.`sizeBytes` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Clip`.`status` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT 1
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Clip`.`sizeBytes` FROM `main`.`Clip` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/stats 200 in 148ms (compile: 2ms, render: 146ms)
+prisma:query SELECT `main`.`Video`.`id`, `main`.`Video`.`filename`, `main`.`Video`.`storageName`, `main`.`Video`.`filePath`, `main`.`Video`.`mimeType`, `main`.`Video`.`sizeBytes`, `main`.`Video`.`duration`, `main`.`Video`.`width`, `main`.`Video`.`height`, `main`.`Video`.`thumbnail`, `main`.`Video`.`status`, `main`.`Video`.`progress`, `main`.`Video`.`message`, `main`.`Video`.`createdAt`, `main`.`Video`.`updatedAt`, COALESCE(`aggr_selection_0_Clip`.`_aggr_count_clips`, 0) AS `_aggr_count_clips` FROM `main`.`Video` LEFT JOIN (SELECT `main`.`Clip`.`videoId`, COUNT(*) AS `_aggr_count_clips` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`videoId`) AS `aggr_selection_0_Clip` ON (`main`.`Video`.`id` = `aggr_selection_0_Clip`.`videoId`) WHERE 1=1 ORDER BY `main`.`Video`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Video`.`id` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/videos?pageSize=6 200 in 64ms (compile: 49ms, render: 15ms)
+ GET /api/health 200 in 298ms (compile: 4ms, render: 294ms)
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Video`.`status` FROM `main`.`Video` WHERE 1=1 GROUP BY `main`.`Video`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Clip`.`status` FROM `main`.`Clip` WHERE 1=1 GROUP BY `main`.`Clip`.`status` LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Highlight`.`id` FROM `main`.`Highlight` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all`, `main`.`Highlight`.`category` FROM `main`.`Highlight` WHERE 1=1 GROUP BY `main`.`Highlight`.`category` LIMIT ? OFFSET ?
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Video`.`sizeBytes` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`duration`) AS `_sum$duration` FROM (SELECT `main`.`Video`.`duration` FROM `main`.`Video` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT SUM(`sizeBytes`) AS `_sum$sizeBytes` FROM (SELECT `main`.`Clip`.`sizeBytes` FROM `main`.`Clip` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/stats 200 in 13ms (compile: 3ms, render: 10ms)
