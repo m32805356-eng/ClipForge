@@ -1,0 +1,9 @@
+# Railway.app configuration for ClipForge
+# https://docs.railway.app/config
+
+[deploy]
+# Health check: wait for the app to respond before marking as ready
+healthcheckPath = "/api/health"
+healthcheckTimeout = 60
+
+# The Dockerfile handles everything — no custom start command needed

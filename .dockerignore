@@ -1,0 +1,73 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Generated content (local only — created at runtime in container)
+uploads/*
+!uploads/.gitkeep
+outputs/*
+!outputs/.gitkeep
+models/*
+!models/.gitkeep
+db/*.db
+db/*.db-journal
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+dev.log
+server.log
+
+# Environment overrides (keep .env, ignore locals)
+.env.local
+.env.*.local
+
+# Skills (z.ai platform, not part of app)
+skills/
+
+# Upload folder (screenshots, etc.)
+upload/
+
+# Docs (not needed in image)
+docs/
+
+# Examples
+examples/
+
+# Download folder
+download/
+
+# Agent browser
+agent-browser/
+
+# Misc
+*.md
+!README.md
+Caddyfile
+components.json
+eslint.config.mjs
+postcss.config.mjs
+tsconfig.json
+tailwind.config.ts
